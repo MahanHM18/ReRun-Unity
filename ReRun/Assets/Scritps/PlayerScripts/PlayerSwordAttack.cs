@@ -14,6 +14,10 @@ public class PlayerSwordAttack : MonoBehaviour
     private bool _canAttack;
     private PlayerAudio _audio;
 
+    public bool HasShield { get; private set; }
+    
+    
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -26,6 +30,7 @@ public class PlayerSwordAttack : MonoBehaviour
     private void Start()
     {
         _canAttack = true;
+        HasShield = false;
     }
 
     public void Attack()
@@ -73,5 +78,22 @@ public class PlayerSwordAttack : MonoBehaviour
             StartCoroutine(UIManager.Instance.ActiveHitMarker());
             _audio.PlayHitEnemyClip();
         }
+    }
+
+    public void EnableShield()
+    {
+        _animator.SetBool("Shield",true);
+        
+    }
+
+    public void DisableShield()
+    {
+        _animator.SetBool("Shield",false);
+        HasShield = false;
+    }
+
+    public void SetShieldToTrue()
+    {
+        HasShield = true;
     }
 }

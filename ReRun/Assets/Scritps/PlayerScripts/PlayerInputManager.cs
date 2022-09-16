@@ -30,6 +30,9 @@ public class PlayerInputManager : MonoBehaviour
         _input.Player.Crouch.canceled += ctx => _playerMovement.StopCrouching();
 
         _input.Player.Attack.performed += ctx => _playerSwordAttack.Attack();
+
+        _input.Player.Shield.performed += ctx => _playerSwordAttack.EnableShield();
+        _input.Player.Shield.canceled += ctx => _playerSwordAttack.DisableShield();
     }
 
     void FixedUpdate()

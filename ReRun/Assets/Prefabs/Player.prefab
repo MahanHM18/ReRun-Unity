@@ -1630,7 +1630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c17c0a1a9c4174429d8b26116d12a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sensitivity: 30
+  Sensitivity: 20
   Orientation: {fileID: 4953673777837879030}
 --- !u!114 &4953673778256948406
 MonoBehaviour:
@@ -1691,6 +1691,8 @@ MonoBehaviour:
   CharacterHealth: 0
   HealthAmout: 100
   HealthBar: {fileID: 0}
+  Blood: {fileID: 0}
+  BloodPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &4953673778285656009
 GameObject:
   m_ObjectHideFlags: 0

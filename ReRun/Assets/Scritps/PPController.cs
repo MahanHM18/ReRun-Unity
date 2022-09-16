@@ -39,7 +39,7 @@ public class PPController : MonoBehaviour
     private void Start()
     {
         _lensDistortion.intensity.value = 0;
-        _colorGrading.saturation.value = 50;
+        _colorGrading.saturation.value = 10;
         _chromaticAberration.intensity.value = 0.2f;
         _targetVignette = 0;
     }
@@ -75,7 +75,7 @@ public class PPController : MonoBehaviour
     public void EndEffect()
     {
         _targetLens = 0;
-        _targetColorGrading = 50;
+        _targetColorGrading = 10;
         _targetChromatic = 0.2f;
     }
 

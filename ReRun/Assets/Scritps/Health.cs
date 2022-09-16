@@ -28,12 +28,20 @@ public class Health : MonoBehaviour
 
     public Vector3 BloodPosition;
 
+    private PlayerSwordAttack _swordAttack;
+
     private void Awake()
     {
         if (CharacterHealth == Character.PLAYER)
+        {
             _audio = GetComponent<PlayerAudio>();
+            _swordAttack = transform.GetChild(0).transform.GetChild(0).GetComponent<PlayerSwordAttack>();
+        }
+
         if (CharacterHealth == Character.ENEMY)
+        {
             _enemyAI = GetComponent<EnemyAI>();
+        }
     }
 
     public void TakeDamage(float value)
@@ -47,11 +55,21 @@ public class Health : MonoBehaviour
 
         if (CharacterHealth == Character.PLAYER)
         {
-            StartCoroutine(PPController.Instance.ActiveDamagetEffect());
-            Debug.Log("Player dameged");
-            CameraShaker.Instance.ShakeOnce(12, 4, 0.6f, 0.5f);
-            _audio.PlayHitPlayerClip();
-            GetComponent<Rigidbody>().AddForce(-GetComponent<PlayerLook>().Orientation.forward * 10,ForceMode.Impulse);
+            if (_swordAttack.HasShield)
+            {
+                CameraShaker.Instance.ShakeOnce(12, 4, 0.6f, 0.5f);
+                GetComponent<Rigidbody>()
+                    .AddForce(-GetComponent<PlayerLook>().Orientation.forward * 5, ForceMode.Impulse);
+                Debug.Log("Shield dameged");
+            }
+            else
+            {
+                StartCoroutine(PPController.Instance.ActiveDamagetEffect());
+                Debug.Log("Player dameged");
+                _audio.PlayHitPlayerClip();
+                GetComponent<Rigidbody>()
+                    .AddForce(-GetComponent<PlayerLook>().Orientation.forward * 10, ForceMode.Impulse);
+            }
         }
 
         if (CharacterHealth == Character.ENEMY)
@@ -64,8 +82,6 @@ public class Health : MonoBehaviour
                 HealthBar.transform.parent.gameObject.SetActive(false);
                 StartCoroutine(UIManager.Instance.ShowEnemyDead());
             }
-                
         }
-            
     }
 }
